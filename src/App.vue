@@ -35,6 +35,9 @@ const listTugasFilter = computed(() => {
   }
 })
 
+const baseBtnClass = 'px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-200 transition'
+const activeBtnClass = 'px-4 py-2 bg-gray-700 text-white rounded-lg'
+
 </script>
 
 <template>
