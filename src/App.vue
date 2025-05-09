@@ -25,6 +25,7 @@ const tambahTugas = () => {
 
     <ul>
       <li v-for="tugas in listTugas" :key="tugas.id">
+        <input type="checkbox" v-model="tugas.status" />
         {{  tugas.nama }}
       </li>
     </ul>
