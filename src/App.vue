@@ -20,6 +20,10 @@ const countActive = computed(() => {
   return listTugas.value.filter(tugas => !tugas.status).length
 })
 
+const hapusTugas = (id) => {
+  listTugas.value = listTugas.value.filter(tugas => tugas.id !== id)
+}
+
 </script>
 
 <template>
@@ -32,6 +36,7 @@ const countActive = computed(() => {
       <li v-for="tugas in listTugas" :key="tugas.id">
         <input type="checkbox" v-model="tugas.status" />
         {{ tugas.nama }}
+        <button @click="hapusTugas(tugas.id)">Hapus</button>
       </li>
     </ul>
     <p>Jumlah tugas aktif: {{ countActive }}</p>
