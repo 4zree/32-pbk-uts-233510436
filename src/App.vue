@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const listTugas = ref([])
 const inputTugas = ref('')
@@ -15,6 +15,11 @@ const tambahTugas = () => {
   })
   inputTugas.value = ''
 }
+
+const countActive = computed(() => {
+  return listTugas.value.filter(tugas => !tugas.status).length
+})
+
 </script>
 
 <template>
@@ -26,9 +31,10 @@ const tambahTugas = () => {
     <ul>
       <li v-for="tugas in listTugas" :key="tugas.id">
         <input type="checkbox" v-model="tugas.status" />
-        {{  tugas.nama }}
+        {{ tugas.nama }}
       </li>
     </ul>
+    <p>Jumlah tugas aktif: {{ countActive }}</p>
   </div>
 </template>
 
