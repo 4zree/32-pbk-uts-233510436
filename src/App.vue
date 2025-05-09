@@ -24,6 +24,17 @@ const hapusTugas = (id) => {
   listTugas.value = listTugas.value.filter(tugas => tugas.id !== id)
 }
 
+const filter = ref('all')
+const listTugasFilter = computed(() => {
+  if (filter.value === 'all') {
+    return listTugas.value
+  } else if (filter.value === 'active') {
+    return listTugas.value.filter(tugas => !tugas.status)
+  } else if (filter.value === 'completed') {
+    return listTugas.value.filter(tugas => tugas.status)
+  }
+})
+
 </script>
 
 <template>
@@ -31,9 +42,14 @@ const hapusTugas = (id) => {
     <h1>Todo List</h1>
     <input type="text" v-model="inputTugas" />
     <button @click="tambahTugas">Tambah</button>
+    <div>
+      <button @click="filter = 'all'">Semua</button>
+      <button @click="filter = 'active'">Aktif</button>
+      <button @click="filter = 'completed'">Selesai</button>
+    </div>
 
     <ul>
-      <li v-for="tugas in listTugas" :key="tugas.id">
+      <li v-for="tugas in listTugasFilter" :key="tugas.id">
         <input type="checkbox" v-model="tugas.status" />
         {{ tugas.nama }}
         <button @click="hapusTugas(tugas.id)">Hapus</button>
